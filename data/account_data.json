@@ -1,0 +1,98 @@
+[
+    {
+      "name": "Sarah Johnson - IRA",
+      "number": "32456178",
+      "repId": "1271",
+      "holdings": [
+        { "ticker": "ICKAX", "units": 55, "unitPrice": 102.34 },
+        { "ticker": "HEMCX", "units": 120, "unitPrice": 398.63 }
+      ],
+      "custodian": "Schwab"
+    },
+    {
+      "name": "Michael Lee - Roth IRA",
+      "number": "12987634",
+      "repId": "9883",
+      "holdings": [
+        { "ticker": "VWELX", "units": 80, "unitPrice": 45.23 }
+      ],
+      "custodian": "Fidelity"
+    },
+    {
+      "name": "Emily Davis - 529 Plan",
+      "number": "78654321",
+      "repId": "3567",
+      "holdings": [
+        { "ticker": "ICKAX", "units": 150, "unitPrice": 102.34 }
+      ],
+      "custodian": "Schwab"
+    },
+    {
+      "name": "Daniel Wright - Brokerage",
+      "number": "54897321",
+      "repId": "1271",
+      "holdings": [
+        { "ticker": "FXAIX", "units": 300, "unitPrice": 210.12 }
+      ],
+      "custodian": "Fidelity"
+    },
+    {
+      "name": "Sophia Harris - 401k",
+      "number": "89721354",
+      "repId": "8996",
+      "holdings": [
+        { "ticker": "ICKAX", "units": 75, "unitPrice": 102.34 },
+        { "ticker": "PRHSX", "units": 65, "unitPrice": 136.27 }
+      ],
+      "custodian": "Schwab"
+    },
+    {
+      "name": "James Taylor - Joint Account",
+      "number": "23198654",
+      "repId": "9883",
+      "holdings": [
+        { "ticker": "VWUSX", "units": 50, "unitPrice": 67.89 }
+      ],
+      "custodian": "Fidelity"
+    },
+    {
+      "name": "Olivia Martin - HSA",
+      "number": "56432987",
+      "repId": "8996",
+      "holdings": [
+        { "ticker": "HEMCX", "units": 100, "unitPrice": 398.63 },
+        { "ticker": "ICKAX", "units": 200, "unitPrice": 102.34 }
+      ],
+      "custodian": "Schwab"
+    },
+    {
+      "name": "William Clark - 403b",
+      "number": "23187698",
+      "repId": "3567",
+      "holdings": [
+        { "ticker": "PRHSX", "units": 90, "unitPrice": 136.27 },
+        { "ticker": "VFIAX", "units": 75, "unitPrice": 350.43 }
+      ],
+      "custodian": "Fidelity"
+    },
+    {
+      "name": "Isabella Moore - Rollover IRA",
+      "number": "89765432",
+      "repId": "1271",
+      "holdings": [
+        { "ticker": "VTSAX", "units": 110, "unitPrice": 103.78 }
+      ],
+      "custodian": "Schwab"
+    },
+    {
+      "name": "Ethan Brown - Trust Account",
+      "number": "56478231",
+      "repId": "8996",
+      "holdings": [
+        { "ticker": "FXAIX", "units": 250, "unitPrice": 210.12 },
+        { "ticker": "VWELX", "units": 180, "unitPrice": 45.23 }
+      ],
+      "custodian": "Fidelity"
+    }
+  ]
+  

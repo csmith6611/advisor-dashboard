@@ -16,7 +16,7 @@ SAMPLE DATA - Advisor
 export const advisor_schema = z.object({
     id: z.string(),
     name: z.string(),
-    custodian: z.object({name: z.string(), repId: z.string()}).array()
+    custodians: z.object({name: z.string(), repId: z.string()}).array()
 })
 
 export type Advisor =  z.infer<typeof advisor_schema>
@@ -61,7 +61,7 @@ export const security_schema = z.object({
     id: z.string(),
     ticker: z.string(),
     name: z.string(),
-    dateAdded: z.date()
+    dateAdded: z.string()
 })
 
 export type Security = z.infer<typeof security_schema>

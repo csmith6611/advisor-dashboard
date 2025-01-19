@@ -1,9 +1,11 @@
 import { Account, Security, Advisor, advisor_schema, security_schema, account_schema } from "../schemas/base_data";
-import json from '../../sample_data.json'
 
+import advisor_data from '../../data/advisor_data.json'
+
+import securities_data from '../../data/securities_data.json'
+import account_data from '../../data/account_data.json'
 
 class Store {
-    raw_data: unknown[]
     advisor_data: Advisor[] = []
     security_data: Security[] = []
     account_data: Account[] = []
@@ -11,37 +13,19 @@ class Store {
 
     constructor(){
         
+        const parsed_account = account_schema.array().safeParse(account_data)
+        const parsed_securities = security_schema.array().safeParse(securities_data)
+        const parsed_advisor = advisor_schema.array().safeParse(advisor_data)
 
-        const json_parsed_data = json as (Account | Security | Advisor )[]
-        this.raw_data = json_parsed_data
 
-        //@ASSUMPTION: Data will come in exactly as displayed in prompt, JSON object array with any of the three types
-
-        //sort into three lists types - parse via schema and add it to the relevant array
-        for( let data_entry of json_parsed_data){
-        
-            const advisor_parsed = advisor_schema.safeParse(data_entry)
-
-            if(advisor_parsed.success){
-                this.advisor_data.push(advisor_parsed.data)
-                continue;
-            }
-
-            const security_parsed = security_schema.safeParse(data_entry)
-
-            if(security_parsed.success){
-                this.security_data.push(security_parsed.data)
-                continue;
-            }
-
-            const account_parsed = account_schema.safeParse(data_entry)
-
-            if(account_parsed.success){
-                this.account_data.push(account_parsed.data)
-                continue;
-            }
-        
+        if(parsed_account.error || parsed_securities.error || parsed_advisor.error){
+            throw new Error("The data passed via JSON is not structured in line with the assumptions highlighted in the README" + parsed_account.error + parsed_advisor.error + parsed_securities.error)
         }
+
+        this.account_data = parsed_account.data
+        this.security_data = parsed_securities.data
+        this.advisor_data = parsed_advisor.data
+
 
         this.aggregate_holdings()
     }
@@ -72,7 +56,12 @@ class Store {
     get_total_account_holdings_value(){
       return Array.from(this.holdings_map.values()).reduce((sum, value) => sum + value, 0)   
      }
+    
+    get_top_10_securities(){
+        const sorted_array = Array.from(this.holdings_map.entries()).sort(([_ticket1, holding1], [_ticket2, holding2]) => holding1 - holding2).map(([ticker, value])=>({[ticker]: value}))
 
+        return sorted_array.slice(0, 10)
+    }
 }
 
 export const server_store = new Store()

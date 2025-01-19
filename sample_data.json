@@ -14,11 +14,12 @@
     "number": "21889645",
     "repId": "9883",
     "holdings": [
-    { "ticker": "HEMCX", "units": 77, "unitPrice": 398.63 }
+    { "ticker": "HEMCX", "units": 77, "unitPrice": 398.63 },
+    { "ticker": "ICKAX", "units": 200, "unitPrice": 500}
     ],
     "custodian": "Schwab"
     },
-    
+
     {
     "id": "2e5012db-3a39-415d-93b4-8b1e3b453c6c",
     "ticker": "ICKAX",
