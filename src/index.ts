@@ -18,6 +18,13 @@ app.get('/account', (req,res) => {
 })
 
 
+
+//@todo add query param to check value of individual holding
+app.get("/holding", (req, res) => {
+    res.send(JSON.stringify(server_store.holdings_map.get('HEMCX')))
+})
+
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
