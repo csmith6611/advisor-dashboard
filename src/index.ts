@@ -25,7 +25,7 @@ app.get("/holdings", (req, res) => {
 })
 
 app.get("/holdings/total", (req, res) => {
-    res.send(JSON.stringify(server_store.get_top_10_securities()))
+    res.send(JSON.stringify(server_store.get_account_holdings_value()))
 })
 
 
