@@ -95,6 +95,9 @@ class Store {
         this.advisor_data.forEach((advisor)=>{
             advisor.custodians.forEach((custodian)=>{
 
+                const custodian_name = custodian.name
+                const rep_id = custodian.repId
+                const advisor_name = advisor.name
 
                 //check if custodian info exists
                 const custodian_information = this.custodians_map.get(custodian.name)
@@ -102,26 +105,29 @@ class Store {
                 //if not, make a new one
                 if(!custodian_information){
                 
-                    this.custodians_map.set(custodian.name, [{advisor: advisor.name, count: 1, rep_ids: [custodian.repId]}])
+                    this.custodians_map.set(custodian_name,[{advisor: advisor_name, count: 1, rep_ids: [rep_id]}])
                     return
                 }
 
                 //if so, look for the advisor, and if its not there make a new one, if it is increment the count and push the rep_ids
-                const advisor_info_index = custodian_information.findIndex((info)=>info.advisor === advisor.name)
+                const advisor_index = custodian_information.findIndex((info)=>info.advisor === advisor_name)
                 
-                if(advisor_info_index === -1){
-                    custodian_information.push({advisor: advisor.name, count: 1, rep_ids: [custodian.repId]})
-
-                    this.custodians_map.set(custodian.name, custodian_information)
-                    return
+                if(advisor_index === -1){
+                    custodian_information.push({advisor: advisor_name, count: 1, rep_ids: [rep_id]})
+                    
+                } else {
+                     // Update existing advisor information
+                    const advisor_info = custodian_information[advisor_index];
+                    custodian_information[advisor_index] = {
+                        ...advisor_info,
+                        count: advisor_info.count + 1,
+                        rep_ids: [...advisor_info.rep_ids, rep_id],
+                    };
+                                        
                 }
-
-
-                //caputre the advisor info and increment and then set it
-                const advisor_info = custodian_information[advisor_info_index]
-                custodian_information[advisor_info_index] = {...advisor_info, count: advisor_info.count+1}
-
                 this.custodians_map.set(custodian.name, custodian_information)
+
+
             })
         })
 
