@@ -1,4 +1,4 @@
-import z from "zod"
+import z from "zod";
 
 /*
 SAMPLE DATA - Advisor
@@ -14,13 +14,12 @@ SAMPLE DATA - Advisor
 //@ASSUMPTION the json would indicate that the id and repId are strings, so that is the assumption I am going with
 
 export const advisor_schema = z.object({
-    id: z.string(),
-    name: z.string(),
-    custodians: z.object({name: z.string(), repId: z.string()}).array()
-})
+  id: z.string(),
+  name: z.string(),
+  custodians: z.object({ name: z.string(), repId: z.string() }).array(),
+});
 
-export type Advisor =  z.infer<typeof advisor_schema>
-
+export type Advisor = z.infer<typeof advisor_schema>;
 
 /*
 SAMPLE DATA - Account
@@ -37,15 +36,16 @@ SAMPLE DATA - Account
 */
 
 export const account_schema = z.object({
-    name: z.string(),
-    number: z.string(),
-    repId: z.string(),
-    holdings: z.object({ticker: z.string(), units: z.number(), unitPrice: z.number()}).array(),
-    custodian: z.string()
-})
+  name: z.string(),
+  number: z.string(),
+  repId: z.string(),
+  holdings: z
+    .object({ ticker: z.string(), units: z.number(), unitPrice: z.number() })
+    .array(),
+  custodian: z.string(),
+});
 
-export type Account = z.infer<typeof account_schema>
-
+export type Account = z.infer<typeof account_schema>;
 
 /*
 SAMPLE DATA - Security:
@@ -58,10 +58,10 @@ SAMPLE DATA - Security:
 */
 
 export const security_schema = z.object({
-    id: z.string(),
-    ticker: z.string(),
-    name: z.string(),
-    dateAdded: z.string()
-})
+  id: z.string(),
+  ticker: z.string(),
+  name: z.string(),
+  dateAdded: z.string(),
+});
 
-export type Security = z.infer<typeof security_schema>
+export type Security = z.infer<typeof security_schema>;
