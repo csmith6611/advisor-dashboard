@@ -60,7 +60,7 @@ class Store {
       account.holdings.forEach((holding) => {
         //ticker is the key, if it doesn't exist initialize it at zero and crunch the numbers
 
-        let running_total = this.holdings_map.get(holding.ticker);
+        const running_total = this.holdings_map.get(holding.ticker);
 
         const dollar_amount = holding.units * holding.unitPrice;
 
@@ -160,7 +160,7 @@ class Store {
     });
 
     //then we order the array via count, it will modify in place
-    this.custodians_map.forEach((value, key) => {
+    this.custodians_map.forEach((value, _key) => {
       value.sort((a, b) => b.count - a.count);
     });
   }

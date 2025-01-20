@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request } from "express";
 import dotenv from "dotenv";
 import { server_store } from "./store";
 
@@ -151,9 +151,13 @@ app.get("/custodian", (req: Request<{}, {}, {}, { name: string }>, res) => {
         return custodian === name;
       })
     );
-    JSON.stringify(return_obj) === "{}"
-      ? res.json({ message: "no custodians found by that name" })
-      : res.json(return_obj);
+    if (JSON.stringify(return_obj) === "{}") {
+      res.json({ message: "no custodians found by that name" });
+      return;
+    } else {
+      res.json(return_obj);
+    }
+
     return;
   }
 
