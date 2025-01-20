@@ -10,10 +10,13 @@ I gave two options with the total value across all accounts question. A global v
 
 I did not want to assume that repId was a primary key in either one of the data sets, so I did not rely on it to make any conclusions in the data. I tried my best to crunch the numbers as literally as possible.
 
-#### Areas of Improvement
-To get this data production ready, it should absolutely be parsed and placed into a relational database either postgres or sql_lite, if you were going for a smaller microservice. Some of the data crunching requires iterations that would be reduced if you were querying in the batch-style that a relational database affords. I tried my best to use the data as-is, and keep any progress I made to ease querying. 
+Note there are a few linting errors that I would have tracked down and dialed in, but they did not appear to be fatal, so I left them.
 
-There is not a lot of error handling in this project. That would be the first thing I did to make the server more robust. 
+#### Areas of Improvement
+
+To get this data production ready, it should absolutely be parsed and placed into a relational database either postgres or sql_lite, if you were going for a smaller microservice. Some of the data crunching requires iterations that would be reduced if you were querying in the batch-style that a relational database affords. I tried my best to use the data as-is, and keep any progress I made to ease querying.
+
+There is not a lot of error handling in this project. That would be the first thing I did to make the server more robust.
 
 Test suite:
 A testing suite should be added to enure the number crunching is yielding the correct results. I was able to verify manually that it was doing what I thought it should do, but with more time I would add some good unit tests to the data crunching script
@@ -27,48 +30,51 @@ To get started with the Advisor Dashboard project, follow the steps below:
 ### Prerequisites
 
 Make sure you have the following installed on your machine:
+
 - Node.js (https://nodejs.org/)
 - npm (Node Package Manager, comes with Node.js)
 
 ### Installation
 
 1. Clone the repository:
-    ```sh
-    git clone https://github.com/your-username/advisor-dashboard.git
-    ```
+
+   ```sh
+   git clone https://github.com/your-username/advisor-dashboard.git
+   ```
 
 2. Navigate to the project directory:
-    ```sh
-    cd advisor-dashboard
-    ```
+
+   ```sh
+   cd advisor-dashboard
+   ```
 
 3. Install the dependencies:
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 ### Running the Project
-
 
 ~~
 @ASSUMPTION: The three data streams listed in the prompt are being parsed from three json files contained within ./data:
 Please place your test data into the data folder with these names:
-    account_data.json
-    advisor_data.json
-    securities_data.json
+account_data.json
+advisor_data.json
+securities_data.json
 They are utilizing the exact structure in the provided prompt and are assumed to be an array of the type objects
 ~~
 
-
 To start the development server, run:
-      ```sh
+`sh
     npm run dev
-    ```
+    `
+
 ### Script to Parse Data
+
 To run the relevant script to aggregate data, run:
-    ```sh
+`sh
     npm run parse_data
-    ```
+    `
 The relevant data will be populated into a ./data/final_data.json
 
 ### Assumptions
@@ -83,7 +89,6 @@ The following assumptions are made throughout the project:
 
 -the json would indicate that the id and repId are strings, so that is the assumption I am going with
 
-
 ### API Documentation
 
 The following API endpoints are available:
@@ -91,51 +96,60 @@ The following API endpoints are available:
 #### GET /holding
 
 **Query Parameters:**
+
 - `ticker` (optional): Filter holdings by ticker.
 - `sort` (optional): Sort holdings by value. Accepted values are `asc` or `desc`.
 
 **Responses:**
+
 - Returns holdings data based on the query parameters.
 
 #### GET /holding/total
 
 **Responses:**
+
 - Returns the total global holdings value.
 
 #### GET /advisor
 
 **Query Parameters:**
+
 - `name` (optional): Filter advisors by name.
 - `id` (optional): Filter advisors by ID.
 
 **Responses:**
+
 - Returns advisor data based on the query parameters.
 
 #### GET /account
 
 **Query Parameters:**
+
 - `accountNumber` (optional): Filter accounts by account number.
 - `sortValues` (optional): Sort accounts by holdings value. Accepted values are `asc` or `desc`.
 
 **Responses:**
+
 - Returns account data based on the query parameters.
 
 #### GET /custodian
 
 **Query Parameters:**
+
 - `name` (optional): Filter custodians by name.
 
 **Responses:**
+
 - Returns custodian data based on the query parameters.
 
 #### GET /security
 
 **Query Parameters:**
+
 - `name` (optional): Filter securities by name.
 - `id` (optional): Filter securities by ID.
 - `ticker` (optional): Filter securities by ticker.
 
 **Responses:**
+
 - Returns security data based on the query parameters.
-
-
