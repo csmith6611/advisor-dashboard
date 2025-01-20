@@ -11,7 +11,7 @@ SAMPLE DATA - Advisor
 
 */
 
-//@ASSUMPTION the json would indicate thtat the id and repId are strings, so that is the assumption I am going with
+//@ASSUMPTION the json would indicate that the id and repId are strings, so that is the assumption I am going with
 
 export const advisor_schema = z.object({
     id: z.string(),

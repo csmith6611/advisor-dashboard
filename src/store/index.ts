@@ -83,10 +83,8 @@ class Store {
 
     }
     
-    get_top_10_securities(){
-        const sorted_array = Array.from(this.holdings_map.entries()).sort(([_ticket1, holding1], [_ticket2, holding2]) => holding1 - holding2).map(([ticker, value])=>({[ticker]: value}))
-
-        return sorted_array.slice(0, 10)
+    get_top_securities_sorted(){
+       return Array.from(this.holdings_map.entries()).sort(([_ticket1, holding1], [_ticket2, holding2]) => holding1 - holding2).map(([ticker, value])=>({[ticker]: value}))
     }
 
     aggregate_advisors_per_custodians_map(){
@@ -140,14 +138,14 @@ class Store {
     }
 
     get_custodians_map(){
-        return Array.from(this.custodians_map.entries())
+        return Object.fromEntries(this.custodians_map.entries())
     }
 }
 
 export const server_store = new Store()
 
 
-function format_number_to_currency(raw_number: number): string {
+export function format_number_to_currency(raw_number: number): string {
     return  raw_number.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD'

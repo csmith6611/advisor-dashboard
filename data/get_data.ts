@@ -11,7 +11,7 @@ function get_aggregated_data(){
 
     const total_value_globally = server_store.get_global_holdings_value()
     const total_value_per_account = server_store.get_account_holdings_value()
-    const top_ten_securities = server_store.get_top_10_securities()
+    const top_ten_securities = server_store.get_top_securities_sorted()
     const advisor_count_per_custodian = server_store.get_custodians_map()
 
 
