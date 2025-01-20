@@ -12,7 +12,8 @@
       "name": "John Smith",
       "custodians": [
         { "name": "Schwab", "repId": "3567" },
-        { "name": "Vanguard", "repId": "4521" }
+        { "name": "Vanguard", "repId": "4521" },
+        {"name": "Schwab", "repId": "3569"}
       ]
     },
     {

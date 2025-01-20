@@ -28,6 +28,10 @@ app.get("/holdings/total", (req, res) => {
     res.send(JSON.stringify(server_store.get_account_holdings_value()))
 })
 
+app.get("/advisor", (req, res) => {
+    res.send(JSON.stringify(server_store.get_custodians_map()))
+})
+
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

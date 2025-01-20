@@ -10,7 +10,7 @@ class Store {
     security_data: Security[] = []
     account_data: Account[] = []
     holdings_map: Map<string, number> = new Map<string, number>()
-    custodians_map: Map<string, {advisor: string, count: number, rep_ids: number[]}> = new Map<string, {advisor: string, count: number, rep_ids: number[]}>()
+    custodians_map: Map<string, {advisor: string, count: number, rep_ids: string[]}[]> = new Map<string, {advisor: string, count: number, rep_ids: string[]}[]>()
 
     constructor(){
         
@@ -29,6 +29,7 @@ class Store {
 
 
         this.aggregate_holdings()
+        this.aggregate_advisors_per_custodians_map()
     }
 
 
@@ -86,6 +87,54 @@ class Store {
         const sorted_array = Array.from(this.holdings_map.entries()).sort(([_ticket1, holding1], [_ticket2, holding2]) => holding1 - holding2).map(([ticker, value])=>({[ticker]: value}))
 
         return sorted_array.slice(0, 10)
+    }
+
+    aggregate_advisors_per_custodians_map(){
+
+        //for all of the advisors and the custodians contained within them:
+        this.advisor_data.forEach((advisor)=>{
+            advisor.custodians.forEach((custodian)=>{
+
+
+                //check if custodian info exists
+                const custodian_information = this.custodians_map.get(custodian.name)
+                
+                //if not, make a new one
+                if(!custodian_information){
+                
+                    this.custodians_map.set(custodian.name, [{advisor: advisor.name, count: 1, rep_ids: [custodian.repId]}])
+                    return
+                }
+
+                //if so, look for the advisor, and if its not there make a new one, if it is increment the count and push the rep_ids
+                const advisor_info_index = custodian_information.findIndex((info)=>info.advisor === advisor.name)
+                
+                if(advisor_info_index === -1){
+                    custodian_information.push({advisor: advisor.name, count: 1, rep_ids: [custodian.repId]})
+
+                    this.custodians_map.set(custodian.name, custodian_information)
+                    return
+                }
+
+
+                //caputre the advisor info and increment and then set it
+                const advisor_info = custodian_information[advisor_info_index]
+                custodian_information[advisor_info_index] = {...advisor_info, count: advisor_info.count+1}
+
+                this.custodians_map.set(custodian.name, custodian_information)
+            })
+        })
+
+
+        //then we order the array via count, it will modify in place
+        this.custodians_map.forEach((value, key) => {
+            value.sort((a, b) => b.count - a.count);
+          });
+
+    }
+
+    get_custodians_map(){
+        return Array.from(this.custodians_map.entries())
     }
 }
 
