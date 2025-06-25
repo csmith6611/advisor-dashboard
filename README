@@ -1,6 +1,6 @@
 # Advisor Dashboard
 
-Hello! This is my submission for the advisor dashboard project with Compound. I am excited to show you what I can do!
+Hello! This is my submission for the advisor dashboard project with UNDISCLOSED. I am excited to show you what I can do!
 
 I went with a straightforward nodejs/express/typescipt backend. I utilize a central store that crunches the data on server startup so that i could instantiate the store without starting the server, therefore allowing for simple scripting!
 
